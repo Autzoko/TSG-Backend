@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.tsgbackend.mapper.ImageMapMapper">
+    <resultMap id="ImageMap" type="com.example.tsgbackend.bean.ImageMap">
+        <id property="image_id" column="image_id"/>
+        <result property="image_id" column="image_id"/>
+        <result property="image_name" column="image_name"/>
+        <result property="save_path" column="save_path"/>
+        <result property="belongs_to" column="belongs_to"/>
+        <result property="last_modified" column="last_modified"/>
+    </resultMap>
+
+    <select id="selectImageById" resultMap="ImageMap" parameterType="String">
+        select * from ImageMap where image_id=#{image_id}
+    </select>
+
+    <insert id="insertImage" parameterType="com.example.tsgbackend.bean.ImageMap">
+        insert into ImageMap
+        values(#{image_id}, #{image_name}, #{save_path}, #{belongs_to}, #{last_modified})
+    </insert>
+
+    <delete id="deleteImageById" parameterType="String">
+        delete from ImageMap where image_id=#{image_id}
+    </delete>
+
+    <select id="selectImageByUserId" resultMap="ImageMap" parameterType="String">
+        select * from ImageMap where belongs_to=#{user_id}
+    </select>
+
+    <delete id="deleteImageByUserId" parameterType="String">
+        delete from ImageMap where belongs_to=#{user_id}
+    </delete>
+</mapper>
