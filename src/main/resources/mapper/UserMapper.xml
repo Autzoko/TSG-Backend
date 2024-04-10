@@ -18,7 +18,11 @@
         value(#{user_id}, #{user_name}, #{user_pwd}, #{phone})
     </insert>
 
-    <delete id="deleteUser" parameterType="String">
+    <delete id="deleteUserById" parameterType="String">
         delete from user where user_id=#{user_id}
     </delete>
+
+    <select id="selectUserByName" resultMap="User" parameterType="String">
+        select * from user where user_name=#{user_name}
+    </select>
 </mapper>
