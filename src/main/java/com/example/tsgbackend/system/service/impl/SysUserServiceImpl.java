@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.tsgbackend.common.constant.CommonConstants;
+import com.example.tsgbackend.common.exception.BadRequestException;
+import com.example.tsgbackend.common.utils.SecurityUtil;
 import com.example.tsgbackend.common.utils.StringUtil;
 import com.example.tsgbackend.system.bean.SysUser;
 import com.example.tsgbackend.system.bean.dto.QueryDto;
@@ -13,8 +15,6 @@ import com.example.tsgbackend.system.mapper.SysUserMapper;
 import com.example.tsgbackend.system.service.SysRoleUserService;
 import com.example.tsgbackend.system.service.SysUserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.security.SecurityUtil;
-import org.apache.coyote.BadRequestException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -83,7 +83,7 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public void enableUser(SysUser sysUser) {
+    public void enabledUser(SysUser sysUser) {
         sysUserMapper.updateById(sysUser);
     }
 
@@ -94,7 +94,19 @@ public class SysUserServiceImpl implements SysUserService {
         String confirmPassword = jsonObject.getString("confirmPassword");
 
         // Get current user
-        SysUser user = sysUserMapper.selectById()
+        SysUser user = sysUserMapper.selectById(SecurityUtil.getCurrentUserId());
+        String pwd = user.getPassword();
+
+        if(!passwordEncoder.matches(password, pwd)) {
+            throw new BadRequestException("original password incorrect, input again");
+        }
+
+        if(!newPassword.equals(confirmPassword)) {
+            throw new BadRequestException("new password not equals to the confirm password, input again");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        sysUserMapper.updateById(user);
     }
 
     /**
