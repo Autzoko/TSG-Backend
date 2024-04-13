@@ -1,6 +1,6 @@
 package com.example.tsgbackend.system.controller;
 
-import com.example.tsgbackend.system.bean.User;
+import com.example.tsgbackend.system.bean.dto.UserDto;
 import com.example.tsgbackend.system.bean.utils.LoginForm;
 import com.example.tsgbackend.system.bean.utils.RegisterForm;
 import com.example.tsgbackend.system.service.UserService;
@@ -35,17 +35,17 @@ public class LoginController {
         System.out.println("login called");
         try {
             if(userExists(loginForm.getUser_name()) == false) {
-                throw new Exception("user not exist");
+                throw new Exception("userDto not exist");
             }
-            List<User> users = userService.selectUserByName(loginForm.getUser_name());
-            User user = users.get(0);
+            List<UserDto> userDtos = userService.selectUserByName(loginForm.getUser_name());
+            UserDto userDto = userDtos.get(0);
 
-            if(passwordCheck(loginForm.getUser_pwd(), user) != true) {
+            if(passwordCheck(loginForm.getUser_pwd(), userDto) != true) {
                 throw new Exception("incorrect password");
             }
 
             HttpSession session = request.getSession(true);
-            session.setAttribute("user", user);
+            session.setAttribute("user", userDto);
 
             return ResponseEntity.status(HttpStatus.OK).headers(setHeaders()).body(setResponseBody("login success"));
         } catch(Exception e) {
@@ -59,16 +59,16 @@ public class LoginController {
             if(userExists(registerForm.getUser_name())) {
                 throw new Exception("user name exist");
             }
-            User newUser = new User();
-            newUser.setUser_id(UUID.randomUUID().toString());
-            newUser.setUser_name(registerForm.getUser_name());
+            UserDto newUserDto = new UserDto();
+            newUserDto.setUser_id(UUID.randomUUID().toString());
+            newUserDto.setUser_name(registerForm.getUser_name());
 
             if(passwordValid(registerForm.getUser_pwd())) {
-                newUser.setUser_pwd(registerForm.getUser_pwd());
+                newUserDto.setUser_pwd(registerForm.getUser_pwd());
             }
-            newUser.setPhone(registerForm.getPhone());
+            newUserDto.setPhone(registerForm.getPhone());
 
-            userService.insertUser(newUser);
+            userService.insertUser(newUserDto);
 
             return ResponseEntity.status(HttpStatus.OK).headers(setHeaders()).body(setResponseBody("sign in success"));
 
@@ -88,13 +88,13 @@ public class LoginController {
     }
 
     private boolean userExists(String user_name) throws Exception {
-        List<User> fetchResult = userService.selectUserByName(user_name);
+        List<UserDto> fetchResult = userService.selectUserByName(user_name);
         if(fetchResult.isEmpty()) return false;
         else return true;
     }
 
-    private boolean passwordCheck(String password, User user) {
-        if(password.equals(user.getUser_pwd())) return true;
+    private boolean passwordCheck(String password, UserDto userDto) {
+        if(password.equals(userDto.getUser_pwd())) return true;
         else return false;
     }
 
