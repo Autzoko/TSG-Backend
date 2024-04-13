@@ -1,6 +1,7 @@
 package com.example.tsgbackend.config.filter;
 
 import com.example.tsgbackend.common.constant.SecurityConstants;
+import com.example.tsgbackend.common.utils.JwtUtil;
 import com.example.tsgbackend.common.utils.StringUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -8,6 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.coyote.BadRequestException;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -28,7 +33,14 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 return;
             }
             // Is Token Valid
-
+            if(JwtUtil.verifyToken(token)) {
+                // Get authentication info
+                Authentication authentication = JwtUtil.getAuthentication(token);
+                // Save authentication info into SpringSecurity context
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        } catch (BadRequestException e) {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
         }
     }
 
