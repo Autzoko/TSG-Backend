@@ -1,13 +1,31 @@
 package com.example.tsgbackend.system.bean.dto;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@TableName("user")
-@Data
+import java.util.List;
+
+@Setter
+@Getter
 public class UserDto {
-    private String user_id;
-    private String user_name;
-    private String user_pwd;
-    private String phone;
+
+    private Long id;
+
+    private String username;
+
+    private String nickName;
+
+    private String email;
+
+    private String password;
+
+    private List<String> roles;
+
+    private Boolean enabled;
+
+    private List<String> roleIds;
+
+    private String uuid;
+
+    private String code;
 }

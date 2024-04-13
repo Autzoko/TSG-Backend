@@ -1,6 +1,6 @@
 package com.example.tsgbackend.system.controller;
 
-import com.example.tsgbackend.system.bean.dto.UserDto;
+import com.example.tsgbackend.system.bean.dto.deprecatedUserDto;
 import com.example.tsgbackend.system.bean.utils.LoginForm;
 import com.example.tsgbackend.system.bean.utils.RegisterForm;
 import com.example.tsgbackend.system.service.UserService;
@@ -35,17 +35,17 @@ public class LoginController {
         System.out.println("login called");
         try {
             if(userExists(loginForm.getUser_name()) == false) {
-                throw new Exception("userDto not exist");
+                throw new Exception("deprecatedUserDto not exist");
             }
-            List<UserDto> userDtos = userService.selectUserByName(loginForm.getUser_name());
-            UserDto userDto = userDtos.get(0);
+            List<deprecatedUserDto> deprecatedUserDtos = userService.selectUserByName(loginForm.getUser_name());
+            deprecatedUserDto deprecatedUserDto = deprecatedUserDtos.get(0);
 
-            if(passwordCheck(loginForm.getUser_pwd(), userDto) != true) {
+            if(passwordCheck(loginForm.getUser_pwd(), deprecatedUserDto) != true) {
                 throw new Exception("incorrect password");
             }
 
             HttpSession session = request.getSession(true);
-            session.setAttribute("user", userDto);
+            session.setAttribute("user", deprecatedUserDto);
 
             return ResponseEntity.status(HttpStatus.OK).headers(setHeaders()).body(setResponseBody("login success"));
         } catch(Exception e) {
@@ -59,16 +59,16 @@ public class LoginController {
             if(userExists(registerForm.getUser_name())) {
                 throw new Exception("user name exist");
             }
-            UserDto newUserDto = new UserDto();
-            newUserDto.setUser_id(UUID.randomUUID().toString());
-            newUserDto.setUser_name(registerForm.getUser_name());
+            deprecatedUserDto newDeprecatedUserDto = new deprecatedUserDto();
+            newDeprecatedUserDto.setUser_id(UUID.randomUUID().toString());
+            newDeprecatedUserDto.setUser_name(registerForm.getUser_name());
 
             if(passwordValid(registerForm.getUser_pwd())) {
-                newUserDto.setUser_pwd(registerForm.getUser_pwd());
+                newDeprecatedUserDto.setUser_pwd(registerForm.getUser_pwd());
             }
-            newUserDto.setPhone(registerForm.getPhone());
+            newDeprecatedUserDto.setPhone(registerForm.getPhone());
 
-            userService.insertUser(newUserDto);
+            userService.insertUser(newDeprecatedUserDto);
 
             return ResponseEntity.status(HttpStatus.OK).headers(setHeaders()).body(setResponseBody("sign in success"));
 
@@ -88,13 +88,13 @@ public class LoginController {
     }
 
     private boolean userExists(String user_name) throws Exception {
-        List<UserDto> fetchResult = userService.selectUserByName(user_name);
+        List<deprecatedUserDto> fetchResult = userService.selectUserByName(user_name);
         if(fetchResult.isEmpty()) return false;
         else return true;
     }
 
-    private boolean passwordCheck(String password, UserDto userDto) {
-        if(password.equals(userDto.getUser_pwd())) return true;
+    private boolean passwordCheck(String password, deprecatedUserDto deprecatedUserDto) {
+        if(password.equals(deprecatedUserDto.getUser_pwd())) return true;
         else return false;
     }
 

@@ -38,7 +38,7 @@ public class SecurityConstants {
     public static final String TOKEN_TYPE = "JWT";
 
     /**
-     * Claim UserDto Role
+     * Claim deprecatedUserDto Role
      */
     public static final String TOKEN_ROLE_CLAIM = "role";
 
