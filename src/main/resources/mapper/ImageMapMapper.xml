@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.tsgbackend.mapper.ImageMapMapper">
-    <resultMap id="ImageMap" type="com.example.tsgbackend.bean.ImageMap">
+<mapper namespace="com.example.tsgbackend.system.mapper.ImageMapMapper">
+    <resultMap id="ImageMap" type="com.example.tsgbackend.system.bean.ImageMap">
         <id property="image_id" column="image_id"/>
         <result property="image_id" column="image_id"/>
         <result property="image_name" column="image_name"/>
@@ -14,7 +14,7 @@
         select * from ImageMap where image_id=#{image_id}
     </select>
 
-    <insert id="insertImage" parameterType="com.example.tsgbackend.bean.ImageMap">
+    <insert id="insertImage" parameterType="com.example.tsgbackend.system.bean.ImageMap">
         insert into ImageMap
         values(#{image_id}, #{image_name}, #{save_path}, #{belongs_to}, #{last_modified})
     </insert>

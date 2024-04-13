@@ -1,4 +1,4 @@
-package com.example.tsgbackend.bean;
+package com.example.tsgbackend.system.bean;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

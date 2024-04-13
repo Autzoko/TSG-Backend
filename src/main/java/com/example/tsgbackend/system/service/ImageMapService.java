@@ -1,6 +1,6 @@
-package com.example.tsgbackend.service;
+package com.example.tsgbackend.system.service;
 
-import com.example.tsgbackend.bean.ImageMap;
+import com.example.tsgbackend.system.bean.ImageMap;
 
 import java.util.List;
 

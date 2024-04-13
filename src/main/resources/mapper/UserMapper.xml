@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.tsgbackend.mapper.UserMapper">
-    <resultMap id="User" type="com.example.tsgbackend.bean.User">
+<mapper namespace="com.example.tsgbackend.system.mapper.UserMapper">
+    <resultMap id="User" type="com.example.tsgbackend.system.bean.User">
         <id property="user_id" column="user_id"/>
         <result property="user_id" column="user_id"/>
         <result property="user_name" column="user_name"/>
@@ -13,7 +13,7 @@
         select * from user where user_id=#{user_id}
     </select>
 
-    <insert id="insertUser" parameterType="com.example.tsgbackend.bean.User">
+    <insert id="insertUser" parameterType="com.example.tsgbackend.system.bean.User">
         insert into user
         value(#{user_id}, #{user_name}, #{user_pwd}, #{phone})
     </insert>

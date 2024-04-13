@@ -1,18 +1,20 @@
-package com.example.tsgbackend.service.impl;
+package com.example.tsgbackend.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.tsgbackend.bean.User;
-import com.example.tsgbackend.mapper.UserMapper;
-import com.example.tsgbackend.service.UserService;
+import com.example.tsgbackend.system.bean.User;
+import com.example.tsgbackend.system.mapper.UserMapper;
+import com.example.tsgbackend.system.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Resource
     private UserMapper userMapper;
 
-    public User selectUserByName(String user_name) throws Exception {
+    public List<User> selectUserByName(String user_name) throws Exception {
         return userMapper.selectUserByName(user_name);
     }
 

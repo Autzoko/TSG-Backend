@@ -1,4 +1,4 @@
-package com.example.tsgbackend.bean;
+package com.example.tsgbackend.system.bean;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;

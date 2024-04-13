@@ -1,9 +1,9 @@
-package com.example.tsgbackend.service.impl;
+package com.example.tsgbackend.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.tsgbackend.bean.ImageMap;
-import com.example.tsgbackend.mapper.ImageMapMapper;
-import com.example.tsgbackend.service.ImageMapService;
+import com.example.tsgbackend.system.bean.ImageMap;
+import com.example.tsgbackend.system.mapper.ImageMapMapper;
+import com.example.tsgbackend.system.service.ImageMapService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
-package com.example.tsgbackend.mapper;
+package com.example.tsgbackend.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.tsgbackend.bean.ImageMap;
+import com.example.tsgbackend.system.bean.ImageMap;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.example.tsgbackend.controller;
+package com.example.tsgbackend.system.controller;
 
-import com.example.tsgbackend.bean.ImageMap;
-import com.example.tsgbackend.service.ImageMapService;
+import com.example.tsgbackend.system.bean.ImageMap;
+import com.example.tsgbackend.system.service.ImageMapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/image-caption")
-public class ImageController {
+public class ImageUploadController {
     @Autowired
     private RestTemplate restTemplate;
 
