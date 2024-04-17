@@ -20,8 +20,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/image-caption")
 public class ImageUploadController {
-    @Autowired
-    private RestTemplate restTemplate;
 
     @Autowired
     private ImageMapService imageMapService;
@@ -86,16 +84,16 @@ public class ImageUploadController {
         return ResponseEntity.status(HttpStatus.OK).body(setResponse(null));
     }
 
-    @GetMapping("/generate")
-    public ResponseEntity<String> generateDescription() {
-        try {
-            String description = sendGenerateRequest();
-            return new ResponseEntity<>(description, HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("Generate Error", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @GetMapping("/generate")
+//    public ResponseEntity<String> generateDescription() {
+//        try {
+//            String description = sendGenerateRequest();
+//            return new ResponseEntity<>(description, HttpStatus.OK);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>("Generate Error", HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
     private void save2server(MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
@@ -109,12 +107,6 @@ public class ImageUploadController {
                 outputStream.write(buffer, 0, bytesRead);
             }
         }
-    }
-
-    private String sendGenerateRequest() {
-        MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
-        parts.add("command", "generate");
-        return restTemplate.postForObject(modelServerUrl, parts, String.class);
     }
 
     private Map<String, Object> setResponse(Object fileId, Object... args) {
