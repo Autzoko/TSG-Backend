@@ -47,5 +47,5 @@ public interface SysRoleService {
      * @Param [id]
      * @Return java.util.List<org.springframework.security.core.GrantedAuthority>
      */
-    List<GrantedAuthority> getRoleByUser(Long id);
+    List<GrantedAuthority> getRolesByUser(Long id);
 }
