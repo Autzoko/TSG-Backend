@@ -9,42 +9,40 @@ public interface SysMenuService {
 
     /**
      * @description Get Menu Tree
-     * @param roles
+     * @param roles Current Roles
      * @return com.alibaba.fastjson.JSONArray
      */
     JSONArray getMenuTree(List<String> roles);
 
     /**
      * @description edit menu
-     * @param sysMenu
-     * @return void
+     * @param sysMenu current system menu
      */
     void editMenu(SysMenu sysMenu);
 
     /**
      * @description delete menu
-     * @param id
-     * @return void
+     * @param id menu id
      */
     void delMenu(Long id);
 
     /**
      * @description query current role's menu of permissions
-     * @param roles
+     * @param roles current role list
      * @return java.util.List<com.example.tsgbackend.system.bean.SysMenu>
      */
     List<SysMenu> queryAllMenus(List<String> roles);
 
     /**
      * @description get menu list
-     * @param blurry
+     * @param blurry query
      * @return com.alibaba.fastjson.JSONArray
      */
     JSONArray getMenuTable(String blurry);
 
     /**
      * @description get all authorized menu by role
-     * @param currentRoles
+     * @param currentRoles current roles
      * @return java.util.List<com.example.tsgbackend.system.bean.SysMenu>
      */
     List<String> getUrlsByRoles(List<String> currentRoles);
