@@ -18,7 +18,7 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
     List<SysMenu> getMenuTree(@Param("roles") List<String> roles);
 
     /**
-     * @Desciption Get URL from Role
+     * @Description Get URL from Role
      * @Param [roles]
      * @Return java.util.List<java.lang.String>
      */
