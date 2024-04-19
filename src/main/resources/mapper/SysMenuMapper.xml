@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.tsgbackend.system.mapper.SysMenuMapper">
+    <select id="getMenuTree" resultType="com.example.tsgbackend.system.bean.SysMenu">
+        SELECT
+            t1.*
+        FROM
+            sys_menu t1
+        LEFT JOIN sys_role_menu t2 ON t1.id = t2.menu_id
+        LEFT JOIN sys_role t3 on t2.role_id = t3.role_id
+        WHERE
+            t3.role_code IN
+        <foreach collection="roles" item="role" open="(" separator="," close=")">
+            #{role}
+        </foreach>
+    </select>
+
+    <select id="getMenuUrlByRole" resultType="java.lang.String">
+        SELECT
+            sm.path
+        FROM
+            sys_menu sm
+        LEFT JOIN sys_role_menu srm on sm.id = srm.menu_id
+        LEFT JOIN sys_role sr on srm.role_id = sr.id
+        WHERE
+            sr.role_code IN
+        <foreach collection="roles" item="role" open="(" separator="," close=")">
+            #{role}
+        </foreach>
+    </select>
+
+    <select id="getPermission" resultType="java.lang.String">
+        SELECT
+            sm.permission
+        FROM
+            sys_menu sm
+        LEFT JOIN sys_role_menu srm on sm.id = srm.menu_id
+        LEFT JOIN sys_role sr on srm.role_id = sr.id
+        WHERE
+            sr.role_code IN
+        <foreach collection="roles" item="role" open="(" separator="," close=")">
+            #{role}
+        </foreach>
+    </select>
+
+</mapper>
