@@ -20,4 +20,5 @@ public class CaptchaConstants {
     public static String fontName;
 
     public static int fontSize = 25;
+
 }
