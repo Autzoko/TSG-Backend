@@ -33,9 +33,11 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers(HttpMethod.POST, "/user/login", "/user/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/").permitAll()
-                        .requestMatchers("/js/**", "/font/**", "/img/**", "/css/**").permitAll())
+                        .requestMatchers(HttpMethod.GET, "/", "index.html", "/favicon.ico", "/auth/code").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/auth/refresh").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers("/js/**", "/fonts/**", "/img/**", "/css/**").permitAll()
+                        .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);

@@ -8,7 +8,7 @@ public class SecurityConstants {
     /**
      * Login URL
      */
-    public static final String USER_LOGIN_URL = "/user/login";
+    public static final String AUTH_LOGIN_URL = "/auth/login";
 
     /**
      * JWT Sign Key
