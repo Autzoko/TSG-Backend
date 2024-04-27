@@ -68,7 +68,7 @@ public class LoginController extends ResultUtil {
 
             // user info
             userDto.setEmail(user.getEmail());
-            userDto.setNickName(user.getNickname());
+            userDto.setNickName(user.getNick_name());
             userDto.setRoles(roles);
             userDto.setPassword("******");
 

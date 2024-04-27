@@ -42,7 +42,7 @@ public class SysUserServiceImpl implements SysUserService {
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
         user.setId(userDto.getId());
-        user.setNickname(user.getNickname());
+        user.setNick_name(user.getNick_name());
 
         if(userDto.getEnabled() != null) {
             user.setEnabled(userDto.getEnabled());
@@ -121,7 +121,7 @@ public class SysUserServiceImpl implements SysUserService {
             wrapper.ne(SysUser::getId, userDto.getId());
         }
         if(StringUtil.isNotBlank(userDto.getUsername()) && StringUtil.isNotBlank(userDto.getNickName())) {
-            wrapper.and(w -> w.eq(SysUser::getUsername, userDto.getUsername()).or().eq(SysUser::getNickname, userDto.getNickName()));
+            wrapper.and(w -> w.eq(SysUser::getUsername, userDto.getUsername()).or().eq(SysUser::getNick_name, userDto.getNickName()));
         }
         long count = sysUserMapper.selectCount(wrapper);
         if(count > 0) {
