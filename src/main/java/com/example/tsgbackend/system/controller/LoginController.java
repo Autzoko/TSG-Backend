@@ -30,7 +30,7 @@ import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/authenticate")
+@RequestMapping("/auth")
 public class LoginController extends ResultUtil {
 
     private final SysUserService userService;
