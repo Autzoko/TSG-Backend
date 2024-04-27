@@ -1,15 +1,16 @@
 package com.example.tsgbackend.config.filter;
 
 import com.example.tsgbackend.common.constant.SecurityConstants;
+import com.example.tsgbackend.common.exception.BadRequestException;
 import com.example.tsgbackend.common.utils.JwtUtil;
 import com.example.tsgbackend.common.utils.StringUtil;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,6 +39,14 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 Authentication authentication = JwtUtil.getAuthentication(token);
                 // Save authentication info into SpringSecurity context
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
+                if (request.getRequestURI().startsWith("/api/")) {
+                    String newRequestURI = request.getRequestURI().substring(4);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher(newRequestURI);
+                    dispatcher.forward(request, response);
+                } else {
+                    filterChain.doFilter(request, response);
+                }
             }
         } catch (BadRequestException e) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());

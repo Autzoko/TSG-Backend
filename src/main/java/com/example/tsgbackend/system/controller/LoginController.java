@@ -148,6 +148,7 @@ public class LoginController extends ResultUtil {
             };
             return ResponseEntity.ok(imgResult);
         } catch (BadRequestException e) {
+            e.printStackTrace();
             return fail(false, e.getMsg());
         }
     }
