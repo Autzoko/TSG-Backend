@@ -1,13 +1,13 @@
 package com.example.tsgbackend.config.security;
 
-import com.example.tsgbackend.system.bean.dto.deprecatedUserDto;
+import com.example.tsgbackend.system.bean.dto.UserDto;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class JwtUser {
-    private deprecatedUserDto deprecatedUserDto;
+    private UserDto userDto;
     private String token;
     private String refreshToken;
 
@@ -15,9 +15,9 @@ public class JwtUser {
      * @Description: Define return object after log in
      * @Param: [token, deprecatedUserDto]
      */
-    public JwtUser(String token, String refreshToken, deprecatedUserDto deprecatedUserDto) {
+    public JwtUser(String token, String refreshToken, UserDto userDto) {
         this.token = token;
         this.refreshToken = refreshToken;
-        this.deprecatedUserDto = deprecatedUserDto;
+        this.userDto = userDto;
     }
 }
