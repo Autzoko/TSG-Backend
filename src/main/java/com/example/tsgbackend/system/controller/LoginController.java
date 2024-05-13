@@ -55,7 +55,7 @@ public class LoginController extends ResultUtil {
                 return fail(false, "incorrect username or password");
             }
             // check password
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getCode());
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword());
             Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
             // set authentication info into context
             SecurityContextHolder.getContext().setAuthentication(authentication);

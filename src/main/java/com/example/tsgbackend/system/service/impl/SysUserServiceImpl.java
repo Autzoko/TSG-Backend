@@ -42,7 +42,7 @@ public class SysUserServiceImpl implements SysUserService {
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
         user.setId(userDto.getId());
-        user.setNick_name(user.getNick_name());
+        user.setNick_name(userDto.getNickName());
 
         if(userDto.getEnabled() != null) {
             user.setEnabled(userDto.getEnabled());
